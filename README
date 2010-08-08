@@ -1,0 +1,1 @@
+Currently, the only good way to build this app is to add this folder to an up to date CyanogenMod source tree and run make -j4 Calibrator.  This is necessary as it is difficult to build this with the normal SDK due to the use of ServiceManager classes.
