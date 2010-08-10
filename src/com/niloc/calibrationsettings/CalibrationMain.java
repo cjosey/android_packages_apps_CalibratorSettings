@@ -99,6 +99,7 @@ public class CalibrationMain extends Activity {
             int index = redInput.getProgress();
             red = index;
 			redOut.setText(String.valueOf(index));
+			writeRenderColor(7, red, green, blue);
         }
            
         @Override
@@ -117,6 +118,7 @@ public class CalibrationMain extends Activity {
             int index = greenInput.getProgress();
             green = index;
 			greenOut.setText(String.valueOf(index));
+			writeRenderColor(7, red, green, blue);
         }
            
         @Override
@@ -135,6 +137,7 @@ public class CalibrationMain extends Activity {
             int index = blueInput.getProgress();
             blue = index;
 			blueOut.setText(String.valueOf(index));
+			writeRenderColor(7, red, green, blue);
         }
            
         @Override
