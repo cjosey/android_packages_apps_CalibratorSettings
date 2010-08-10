@@ -11,7 +11,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import android.graphics.BitmapFactory;
+
+import android.graphics.Bitmap;
+
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import android.os.ServiceManager;
 
@@ -19,9 +27,19 @@ public class CalibrationMain extends Activity {
 	
 	private Button enableButton;
 	
-	private EditText redText;
-	private EditText blueText;
-	private EditText greenText;
+	private SeekBar redInput;
+	private SeekBar blueInput;
+	private SeekBar  greenInput;
+
+	private TextView redOut;
+	private TextView greenOut;
+	private TextView blueOut;
+
+	private ImageView image;
+
+	int red;
+	int green;
+	int blue;
 	
 	Database db = new Database(this);
     
@@ -32,62 +50,131 @@ public class CalibrationMain extends Activity {
         setContentView(R.layout.main);
         this.enableButton = (Button)this.findViewById(R.id.enable);
         
-        this.redText = (EditText)this.findViewById(R.id.redIn);
-        this.greenText = (EditText)this.findViewById(R.id.greenIn);
-        this.blueText = (EditText)this.findViewById(R.id.blueIn);    
+        this.redInput = (SeekBar)this.findViewById(R.id.seekRed);
+        this.greenInput = (SeekBar)this.findViewById(R.id.seekGreen);
+        this.blueInput = (SeekBar)this.findViewById(R.id.seekBlue); 
+
+		this.redOut = (TextView)this.findViewById(R.id.redNum);
+		this.greenOut = (TextView)this.findViewById(R.id.greenNum);
+		this.blueOut = (TextView)this.findViewById(R.id.blueNum);
+   
+		this.image = (ImageView)this.findViewById(R.id.calibImage);
+
+        Bitmap mBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.color);
+
+		image.setImageBitmap(mBitmap);
         
-	db.open();
-	String red = String.valueOf(db.getRed(1));
-	String green = String.valueOf(db.getGreen(1));
-	String blue = String.valueOf(db.getBlue(1));
-	db.close();
+        db.open();
+        red = db.getRed(1);
+        green = db.getGreen(1);
+        blue = db.getBlue(1);
+        db.close();
 	
-	redText.setText(red);
-	greenText.setText(green);
-	blueText.setText(blue);
+        redInput.setProgress(red);
+        greenInput.setProgress(green);
+        blueInput.setProgress(blue);
+
+		redOut.setText(String.valueOf(red));
+		greenOut.setText(String.valueOf(green));
+		blueOut.setText(String.valueOf(blue));
         
         this.enableButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int red = Integer.parseInt(redText.getText().toString());
-				int green = Integer.parseInt(greenText.getText().toString());
-				int blue = Integer.parseInt(blueText.getText().toString());;
 				writeRenderColor(7, red, green, blue);
 				db.open();
                 db.replaceRGBPreset("Default", red, green, blue, 1);
+				db.close();
 			}
           });
+		this.redInput.setOnSeekBarChangeListener(RedChange);
+		this.greenInput.setOnSeekBarChangeListener(GreenChange);
+		this.blueInput.setOnSeekBarChangeListener(BlueChange);
     }
-    //ADDED
+ 
+	private OnSeekBarChangeListener RedChange = new OnSeekBarChangeListener(){
+
+    @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            int index = redInput.getProgress();
+            red = index;
+			redOut.setText(String.valueOf(index));
+        }
+           
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        }
+    };
+
+	private OnSeekBarChangeListener GreenChange = new OnSeekBarChangeListener(){
+
+    @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            int index = greenInput.getProgress();
+            green = index;
+			greenOut.setText(String.valueOf(index));
+        }
+           
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        }
+    };
+
+	private OnSeekBarChangeListener BlueChange = new OnSeekBarChangeListener(){
+
+    @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            int index = blueInput.getProgress();
+            blue = index;
+			blueOut.setText(String.valueOf(index));
+        }
+           
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+        }
+    };
+
     private void writeRenderColor(int id, int red, int green, int blue) {
        try {
-           IBinder flinger = ServiceManager.getService("SurfaceFlinger");
-	   if (flinger != null) {
-                Parcel data = Parcel.obtain();
-                data.writeInterfaceToken("android.ui.ISurfaceComposer");
-                data.writeInt(id);
-                flinger.transact(1014, data, null, 0);
-                data.recycle();
-
-		data = Parcel.obtain();
-                data.writeInterfaceToken("android.ui.ISurfaceComposer");
-		data.writeInt(red);
-		flinger.transact(1015, data, null, 0);
-		data.recycle();
-
-		data = Parcel.obtain();
-                data.writeInterfaceToken("android.ui.ISurfaceComposer");
-		data.writeInt(green);
-		flinger.transact(1016, data, null, 0);
-		data.recycle();
-
-		data = Parcel.obtain();
-                data.writeInterfaceToken("android.ui.ISurfaceComposer");
-		data.writeInt(blue);
-		flinger.transact(1017, data, null, 0);
-		data.recycle();
-	   }
-	} catch (RemoteException ex) {
-	}
+	        IBinder flinger = ServiceManager.getService("SurfaceFlinger");
+		    if (flinger != null) {
+    	        Parcel data = Parcel.obtain();
+    	        data.writeInterfaceToken("android.ui.ISurfaceComposer");
+    	        data.writeInt(id);
+    	        flinger.transact(1014, data, null, 0);
+    	        data.recycle();
+	
+    	     	data = Parcel.obtain();
+    	        data.writeInterfaceToken("android.ui.ISurfaceComposer");
+			    data.writeInt(red);
+			    flinger.transact(1015, data, null, 0);
+			    data.recycle();
+	
+    	    	data = Parcel.obtain();
+    	        data.writeInterfaceToken("android.ui.ISurfaceComposer");
+			    data.writeInt(green);
+			    flinger.transact(1016, data, null, 0);
+			    data.recycle();
+	
+			    data = Parcel.obtain();
+    	        data.writeInterfaceToken("android.ui.ISurfaceComposer");
+			    data.writeInt(blue);
+			    flinger.transact(1017, data, null, 0);
+			    data.recycle();
+			}
+	    } catch (RemoteException ex) {
+	    } 
     }
 }
