@@ -1,1 +1,3 @@
+This is an app to modify calibration settings in roms that have this feature enabled in SurfaceFlinger.  It allows a user to scale their settings selection from 1 to 1000 for each color the screen outputs.  It defaults to 1000, as to avoid any potential hassle, but any other setting will load on boot.
+
 Currently, the only good way to build this app is to add this folder to an up to date CyanogenMod source tree and run make -j4 Calibrator.  This is necessary as it is difficult to build this with the normal SDK due to the use of ServiceManager classes.

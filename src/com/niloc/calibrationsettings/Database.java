@@ -65,7 +65,7 @@ public class Database {
 	
         db = DBHelper.getWritableDatabase();
         if(getNumEntries() == 0) {
-	    insertRGBPreset("Default", 975, 937, 824);
+	    insertRGBPreset("Default", 1000, 1000, 1000);
         }
         return this;
     }
