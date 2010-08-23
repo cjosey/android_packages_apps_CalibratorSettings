@@ -33,4 +33,5 @@
     
     <uses-sdk android:minSdkVersion="5" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+
 </manifest>
