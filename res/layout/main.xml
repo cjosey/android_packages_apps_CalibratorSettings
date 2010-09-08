@@ -1,67 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-	android:id="@+id/widget28"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android"
->
-	<Button
-		android:id="@+id/enable"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="@string/ok"
-		android:layout_below="@+id/widget34"
-		android:layout_alignParentRight="true"
-	/>
-
-	<TableLayout
-		android:id="@+id/widget34"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="fill_parent"
 		android:orientation="vertical"
-		android:layout_alignParentTop="true"
-		android:layout_alignParentLeft="true"
-	>
-
-		<TableRow
-			android:id="@+id/widget35"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-		>
-
-			<TextView
-				android:id="@+id/header"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/header"
-				android:textSize="18sp"
-			/>
-
-		</TableRow>
-
-		<TableRow
-			android:id="@+id/widget35"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-		>
+		android:background="@drawable/bg"
+		android:gravity="center_horizontal"
+>
 
 			<ImageView
        			android:id="@+id/calibImage"
-	    		android:layout_width="200dp" 
-        		android:layout_height="200dp"
+	    		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
         		android:scaleType="fitXY" 
-				android:padding="10dip"
-			/>
-
-		</TableRow>
-		<TableRow
-			android:id="@+id/widget36"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-		>
+        		android:src="@drawable/color"
+				android:layout_marginTop="70dip"
+				android:layout_marginBottom="24dip"
+			/>  
+<RelativeLayout 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content" 
+	android:orientation="vertical"
+	android:gravity="center_horizontal"
+	>
+	<Button
+		android:id="@+id/preset1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/redc"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+	/>
+	<Button
+		android:id="@+id/preset2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/greenc"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+		android:layout_toRightOf="@id/preset1"
+	/>
+	<Button
+		android:id="@+id/preset3"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/bluec"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+		android:layout_toRightOf="@id/preset2"
+	/>
+	<Button
+		android:id="@+id/custom1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/custom"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+		android:layout_toRightOf="@id/preset3"
+	/>
+</RelativeLayout>
 
 			<TableLayout
 				android:id="@+id/widget38"
@@ -92,6 +100,10 @@
 						android:layout_height="wrap_content" 
 						android:max="1000"
 						android:progress="0"
+						android:progressDrawable="@drawable/seekbar"
+						android:thumb="@drawable/seekbarstatus"
+				    	android:paddingRight="7dip"
+				    	android:paddingLeft="7dip"
 				    />
 
 					<TextView
@@ -127,6 +139,10 @@
 						android:layout_height="wrap_content" 
 						android:max="1000"
 						android:progress="0"
+						android:progressDrawable="@drawable/seekbar"
+						android:thumb="@drawable/seekbarstatus"
+				    	android:paddingRight="7dip"
+				    	android:paddingLeft="7dip"
 	    			/>
 
 					<TextView
@@ -161,6 +177,10 @@
 						android:layout_height="wrap_content" 
 						android:max="1000"
 						android:progress="0"
+						android:progressDrawable="@drawable/seekbar"
+						android:thumb="@drawable/seekbarstatus"
+				    	android:paddingRight="7dip"
+				    	android:paddingLeft="7dip"
 				    />
 
 					<TextView
@@ -174,7 +194,20 @@
 
 				</TableRow>
 			</TableLayout>
-		</TableRow>
-	</TableLayout>
 
-</RelativeLayout>
+	<Button
+		android:id="@+id/enable"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/ok"
+		android:layout_alignParentRight="true"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+		android:textSize="18sp"
+		android:layout_marginTop="10dip"
+	/>
+
+	</LinearLayout>

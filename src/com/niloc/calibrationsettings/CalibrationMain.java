@@ -2,11 +2,13 @@ package com.niloc.calibrationsettings;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -25,7 +27,15 @@ import android.os.ServiceManager;
 
 public class CalibrationMain extends Activity {
 	
+    private final static String CALIBRATORPREFS = "CalibratorPref";
+    private final static String BOOTPRESET = "bootPreset";
+    private final static String CUSTOMPREFS = "customPrefs";
+    
 	private Button enableButton;
+	private Button preset1;
+	private Button preset2;
+	private Button preset3;
+	private Button custom1;
 	
 	private SeekBar redInput;
 	private SeekBar blueInput;
@@ -40,6 +50,8 @@ public class CalibrationMain extends Activity {
 	int red;
 	int green;
 	int blue;
+
+	int settingNum;
 	
 	Database db = new Database(this);
     
@@ -49,6 +61,10 @@ public class CalibrationMain extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         this.enableButton = (Button)this.findViewById(R.id.enable);
+        this.preset1 = (Button)this.findViewById(R.id.preset1);
+        this.preset2 = (Button)this.findViewById(R.id.preset2);
+        this.preset3 = (Button)this.findViewById(R.id.preset3);
+        this.custom1 = (Button)this.findViewById(R.id.custom1);
         
         this.redInput = (SeekBar)this.findViewById(R.id.seekRed);
         this.greenInput = (SeekBar)this.findViewById(R.id.seekGreen);
@@ -57,18 +73,17 @@ public class CalibrationMain extends Activity {
 		this.redOut = (TextView)this.findViewById(R.id.redNum);
 		this.greenOut = (TextView)this.findViewById(R.id.greenNum);
 		this.blueOut = (TextView)this.findViewById(R.id.blueNum);
-   
-		this.image = (ImageView)this.findViewById(R.id.calibImage);
 
-        Bitmap mBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.color);
+		SharedPreferences prefs = getSharedPreferences(CALIBRATORPREFS, Context.MODE_PRIVATE);
+        int preset = Integer.parseInt(prefs.getString(BOOTPRESET, "1"));
 
-		image.setImageBitmap(mBitmap);
-        
-        db.open();
-        red = db.getRed(1);
-        green = db.getGreen(1);
-        blue = db.getBlue(1);
-        db.close();
+		db.open();
+		red = db.getRed(preset);
+        green = db.getGreen(preset);
+		blue = db.getBlue(preset);
+		db.close();
+		
+		settingNum = preset;
 	
         redInput.setProgress(red);
         greenInput.setProgress(green);
@@ -77,14 +92,81 @@ public class CalibrationMain extends Activity {
 		redOut.setText(String.valueOf(red));
 		greenOut.setText(String.valueOf(green));
 		blueOut.setText(String.valueOf(blue));
-        
+
+		this.preset1.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				settingNum = 1;
+
+				db.open();
+				int redc = db.getRed(settingNum);
+				int greenc = db.getGreen(settingNum);
+				int bluec = db.getBlue(settingNum);
+				db.close();
+
+				writeRenderColor(7, redc, greenc, bluec);
+			}
+          });
+
+        this.preset2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				settingNum = 2;
+
+				db.open();
+				int redc = db.getRed(settingNum);
+				int greenc = db.getGreen(settingNum);
+				int bluec = db.getBlue(settingNum);
+				db.close();
+
+				writeRenderColor(7, redc, greenc, bluec);
+			}
+          });
+        this.preset3.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				settingNum = 3;
+
+				db.open();
+				int redc = db.getRed(settingNum);
+				int greenc = db.getGreen(settingNum);
+				int bluec = db.getBlue(settingNum);
+				db.close();
+
+				writeRenderColor(7, redc, greenc, bluec);
+			}
+          });
+        this.custom1.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				settingNum = 4;
+
+				db.open();
+				int redc = db.getRed(settingNum);
+				int greenc = db.getGreen(settingNum);
+				int bluec = db.getBlue(settingNum);
+				db.close();
+
+				writeRenderColor(7, redc, greenc, bluec);
+			}
+          });
+
+		
         this.enableButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				writeRenderColor(7, red, green, blue);
-				db.open();
-                db.replaceRGBPreset("Default", red, green, blue, 1);
-				db.close();
+				
+				// SAVE SHARED PREFS				
+				int customPrefs = settingNum;
+				saveCustomPreferencesData(String.valueOf(customPrefs));
+				
+				if(settingNum == 4) 
+				{
+					db.open();
+                	db.replaceRGBPreset("Custom", red, green, blue, settingNum);
+					db.close();
+				}
 			}
           });
 		this.redInput.setOnSeekBarChangeListener(RedChange);
@@ -149,7 +231,22 @@ public class CalibrationMain extends Activity {
         }
     };
 
+    public void saveCustomPreferencesData(String customPrefs) {
+        SharedPreferences prefs = getSharedPreferences(CALIBRATORPREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(CUSTOMPREFS, customPrefs);
+        editor.commit();
+    }
+
     private void writeRenderColor(int id, int red, int green, int blue) {
+
+		redOut.setText(String.valueOf(red));
+		greenOut.setText(String.valueOf(green));
+		blueOut.setText(String.valueOf(blue));
+	    redInput.setProgress(red);
+	    greenInput.setProgress(green);
+	    blueInput.setProgress(blue);
+
        try {
 	        IBinder flinger = ServiceManager.getService("SurfaceFlinger");
 		    if (flinger != null) {

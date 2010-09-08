@@ -4,7 +4,11 @@
     <string name="red">Red:</string>
     <string name="green">Green:</string>
     <string name="blue">Blue:</string>
-    <string name="ok">Save Settings</string>
+	<string name="redc">Red</string>
+	<string name="bluec">Blue</string>
+	<string name="greenc">Green</string>
+	<string name="custom">Custom</string>
+    <string name="ok">Save Custom</string>
     <string name="thousand">1000</string>
     <string name="app_name">Calibration Settings</string>
 </resources>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:orientation="horizontal"
+	android:layout_height="fill_parent" android:background="@drawable/bg">
+
+<LinearLayout
+	android:id="@+id/leftpanel"
+	android:layout_weight="1"
+	android:layout_width="wrap_content"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:padding="10dip"
+	android:layout_marginTop="50dip"
+>
+			<TableLayout
+				android:id="@+id/widget38"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:padding="5dip"
+			>
+
+				<TableRow
+					android:id="@+id/widget39"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:paddingTop="5dip"
+					android:paddingBottom="5dip"
+				>
+					<TextView
+						android:id="@+id/red"
+						android:layout_width="55dp"
+						android:layout_height="wrap_content"
+						android:text="@string/red"
+						android:textSize="16sp"
+					/>
+
+					<SeekBar android:id="@+id/seekRed"
+						android:layout_width="190dp"
+						android:layout_height="wrap_content" 
+						android:max="1000"
+						android:progress="0"
+						android:progressDrawable="@drawable/seekbar"
+						android:thumb="@drawable/seekbarstatus"
+				    	android:paddingRight="7dip"
+				    	android:paddingLeft="7dip"
+				    />
+
+					<TextView
+						android:id="@+id/redNum"
+						android:layout_width="55dp"
+						android:layout_height="wrap_content"
+						android:text="@string/thousand"
+						android:textSize="16sp"
+						android:paddingLeft="12dip"
+					/>
+			
+				</TableRow>
+				
+				<TableRow
+					android:id="@+id/widget43"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:paddingTop="5dip"
+					android:paddingBottom="5dip"
+				>
+
+					<TextView
+						android:id="@+id/green"
+						android:layout_width="55dp"
+						android:layout_height="wrap_content"
+						android:text="@string/green"
+						android:textSize="16sp"
+					/>
+
+					<SeekBar android:id="@+id/seekGreen"
+						android:layout_width="190dp"
+						android:layout_height="wrap_content" 
+						android:max="1000"
+						android:progress="0"
+						android:progressDrawable="@drawable/seekbar"
+						android:thumb="@drawable/seekbarstatus"
+				    	android:paddingRight="7dip"
+				    	android:paddingLeft="7dip"
+	    			/>
+
+					<TextView
+						android:id="@+id/greenNum"
+						android:layout_width="55dp"
+						android:layout_height="wrap_content"
+						android:text="@string/thousand"
+						android:textSize="16sp"
+						android:paddingLeft="12dip"
+					/>
+
+				</TableRow>
+
+				<TableRow
+					android:id="@+id/widget40"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:paddingTop="5dip"
+					android:paddingBottom="5dip"
+				>
+					<TextView
+						android:id="@+id/blue"
+						android:layout_width="55dp"
+						android:layout_height="wrap_content"
+						android:text="@string/blue"
+						android:textSize="16sp"
+					/>
+				
+					<SeekBar android:id="@+id/seekBlue"
+						android:layout_width="190dp"
+						android:layout_height="wrap_content" 
+						android:max="1000"
+						android:progress="0"
+						android:progressDrawable="@drawable/seekbar"
+						android:thumb="@drawable/seekbarstatus"
+				    	android:paddingRight="7dip"
+				    	android:paddingLeft="7dip"
+				    />
+
+					<TextView
+						android:id="@+id/blueNum"
+						android:layout_width="55dp"
+						android:layout_height="wrap_content"
+						android:text="@string/thousand"
+						android:textSize="16sp"
+						android:paddingLeft="12dip"
+					/>
+
+				</TableRow>
+			</TableLayout>
+
+<RelativeLayout
+	android:id="@+id/presetlayout"
+	android:layout_height="wrap_content" 
+	android:layout_width="fill_parent"
+	android:orientation="vertical"
+	>
+	<Button
+		android:id="@+id/preset1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/redc"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+	/>
+	<Button
+		android:id="@+id/preset2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/greenc"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+		android:layout_toRightOf="@id/preset1"
+	/>
+	<Button
+		android:id="@+id/preset3"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/bluec"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+		android:layout_toRightOf="@id/preset2"
+	/>
+	<Button
+		android:id="@+id/custom1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/custom"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+		android:layout_toRightOf="@id/preset3"
+	/>
+</RelativeLayout>
+
+	<Button
+		android:id="@+id/enable"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/ok"
+		android:layout_alignParentRight="true"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+		android:textSize="18sp"
+		android:layout_marginTop="20dip"
+	/>
+</LinearLayout>
+	<RelativeLayout android:layout_height="fill_parent"
+		android:layout_width="fill_parent" android:layout_alignParentRight="true"
+		android:layout_toRightOf="@id/leftpanel">
+			<ImageView
+       			android:id="@+id/calibImage"
+	    		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:scaleType="fitXY" 
+        		android:src="@drawable/color"
+				android:layout_marginTop="50dip"
+				android:padding="10dip"
+			/>  
+
+	</RelativeLayout>
+</RelativeLayout>

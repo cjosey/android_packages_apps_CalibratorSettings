@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="header">Choose Your Calibration Settings (out of 1000):</string>
+    <string name="header">Choose Your Calibration Settings:</string>
     <string name="red">Red:</string>
     <string name="green">Green:</string>
     <string name="blue">Blue:</string>
-    <string name="ok">Enable</string>
+	<string name="redc">Red</string>
+	<string name="bluec">Blue</string>
+	<string name="greenc">Green</string>
+	<string name="custom">Custom</string>
+    <string name="ok">Save Custom</string>
     <string name="thousand">1000</string>
     <string name="app_name">Calibration Settings</string>
 </resources>
