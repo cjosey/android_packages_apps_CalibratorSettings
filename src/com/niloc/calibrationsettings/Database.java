@@ -21,7 +21,7 @@ public class Database {
 
     private static final String DATABASE_NAME = "calibrator.db";
     private static final String DATABASE_TABLE_SETTINGS = "tblCurrentSettings";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     private static final String DATABASE_CREATE = "CREATE TABLE " + DATABASE_TABLE_SETTINGS 
         + "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " 
@@ -68,6 +68,7 @@ public class Database {
 	    	insertRGBPreset("Red", 1000, 0, 0);
 			insertRGBPreset("Green", 0, 1000, 0);
 			insertRGBPreset("Blue", 0, 0, 1000);
+			insertRGBPreset("Custom", 1000, 1000, 1000);
 			insertRGBPreset("Custom", 1000, 1000, 1000);
         }
         return this;

@@ -7,7 +7,8 @@
 	<string name="redc">Red</string>
 	<string name="bluec">Blue</string>
 	<string name="greenc">Green</string>
-	<string name="custom">Custom</string>
+	<string name="custom1">User 1</string>
+	<string name="custom2">User 2</string>
     <string name="ok">Save Custom</string>
     <string name="thousand">1000</string>
     <string name="app_name">Calibration Settings</string>

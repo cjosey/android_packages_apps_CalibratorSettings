@@ -36,6 +36,7 @@ public class CalibrationMain extends Activity {
 	private Button preset2;
 	private Button preset3;
 	private Button custom1;
+	private Button custom2;
 	
 	private SeekBar redInput;
 	private SeekBar blueInput;
@@ -65,6 +66,7 @@ public class CalibrationMain extends Activity {
         this.preset2 = (Button)this.findViewById(R.id.preset2);
         this.preset3 = (Button)this.findViewById(R.id.preset3);
         this.custom1 = (Button)this.findViewById(R.id.custom1);
+		this.custom2 = (Button)this.findViewById(R.id.custom2);
         
         this.redInput = (SeekBar)this.findViewById(R.id.seekRed);
         this.greenInput = (SeekBar)this.findViewById(R.id.seekGreen);
@@ -75,7 +77,7 @@ public class CalibrationMain extends Activity {
 		this.blueOut = (TextView)this.findViewById(R.id.blueNum);
 
 		SharedPreferences prefs = getSharedPreferences(CALIBRATORPREFS, Context.MODE_PRIVATE);
-        int preset = Integer.parseInt(prefs.getString(BOOTPRESET, "1"));
+        int preset = prefs.getInt(BOOTPRESET, 4);
 
 		db.open();
 		red = db.getRed(preset);
@@ -104,6 +106,11 @@ public class CalibrationMain extends Activity {
 				int bluec = db.getBlue(settingNum);
 				db.close();
 
+				SharedPreferences settings = getSharedPreferences(CALIBRATORPREFS, Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putInt(BOOTPRESET, settingNum);
+				editor.commit();
+
 				writeRenderColor(7, redc, greenc, bluec);
 			}
           });
@@ -119,6 +126,12 @@ public class CalibrationMain extends Activity {
 				int bluec = db.getBlue(settingNum);
 				db.close();
 
+				SharedPreferences settings = getSharedPreferences(CALIBRATORPREFS, Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putInt(BOOTPRESET, settingNum);
+				editor.commit();
+
+
 				writeRenderColor(7, redc, greenc, bluec);
 			}
           });
@@ -132,6 +145,11 @@ public class CalibrationMain extends Activity {
 				int greenc = db.getGreen(settingNum);
 				int bluec = db.getBlue(settingNum);
 				db.close();
+
+				SharedPreferences settings = getSharedPreferences(CALIBRATORPREFS, Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putInt(BOOTPRESET, settingNum);
+				editor.commit();
 
 				writeRenderColor(7, redc, greenc, bluec);
 			}
@@ -147,6 +165,31 @@ public class CalibrationMain extends Activity {
 				int bluec = db.getBlue(settingNum);
 				db.close();
 
+				SharedPreferences settings = getSharedPreferences(CALIBRATORPREFS, Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putInt(BOOTPRESET, settingNum);
+				editor.commit();
+
+				writeRenderColor(7, redc, greenc, bluec);
+			}
+          });
+
+		this.custom2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				settingNum = 5;
+
+				db.open();
+				int redc = db.getRed(settingNum);
+				int greenc = db.getGreen(settingNum);
+				int bluec = db.getBlue(settingNum);
+				db.close();
+
+				SharedPreferences settings = getSharedPreferences(CALIBRATORPREFS, Context.MODE_PRIVATE);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putInt(BOOTPRESET, settingNum);
+				editor.commit();
+
 				writeRenderColor(7, redc, greenc, bluec);
 			}
           });
@@ -161,7 +204,7 @@ public class CalibrationMain extends Activity {
 				int customPrefs = settingNum;
 				saveCustomPreferencesData(String.valueOf(customPrefs));
 				
-				if(settingNum == 4) 
+				if(settingNum == 4 || settingNum == 5) 
 				{
 					db.open();
                 	db.replaceRGBPreset("Custom", red, green, blue, settingNum);

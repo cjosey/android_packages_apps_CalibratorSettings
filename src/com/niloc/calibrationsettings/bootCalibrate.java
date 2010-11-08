@@ -31,7 +31,7 @@ public class bootCalibrate extends Activity{
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.main);
 		SharedPreferences prefs = getSharedPreferences(CALIBRATORPREFS, Context.MODE_PRIVATE);
-        int preset = Integer.parseInt(prefs.getString(BOOTPRESET, "1"));
+        int preset = prefs.getInt(BOOTPRESET, 4);
 
 		db.open();
 		int red = db.getRed(preset);

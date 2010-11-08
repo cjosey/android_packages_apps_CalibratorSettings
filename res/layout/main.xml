@@ -61,13 +61,25 @@
 		android:id="@+id/custom1"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="@string/custom"
+		android:text="@string/custom1"
 		android:background="@drawable/btnstart"
 		android:textColor="#fff"
 		android:shadowDy="1.0"
 		android:shadowRadius="0.5"
 		android:shadowColor="#111"
 		android:layout_toRightOf="@id/preset3"
+	/>
+	<Button
+		android:id="@+id/custom2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/custom2"
+		android:background="@drawable/btnstart"
+		android:textColor="#fff"
+		android:shadowDy="1.0"
+		android:shadowRadius="0.5"
+		android:shadowColor="#111"
+		android:layout_toRightOf="@id/custom1"
 	/>
 </RelativeLayout>
 
